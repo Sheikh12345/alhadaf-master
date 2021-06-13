@@ -6,13 +6,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 
 class TalentShowPerson extends StatefulWidget {
-
   @override
   _TalentShowPersonState createState() => _TalentShowPersonState();
 }
 
 class _TalentShowPersonState extends State<TalentShowPerson> {
-
   String _name;
   String _position;
   String _country;
@@ -30,15 +28,15 @@ class _TalentShowPersonState extends State<TalentShowPerson> {
       fontWeight: FontWeight.bold,
       color: Colors.black87);
 
-  final name = TextEditingController();
-  final position = TextEditingController();
-  final country = TextEditingController();
-  final location = TextEditingController();
-  final numberId = TextEditingController();
-  final number = TextEditingController();
-  final email = TextEditingController();
-  final date = TextEditingController();
-
+  final nameCtrl = TextEditingController();
+  final positionCtrl = TextEditingController();
+  final countryCtrl = TextEditingController();
+  final locationCtrl = TextEditingController();
+  final numberIdCtrl = TextEditingController();
+  final numberCtrl = TextEditingController();
+  final emailCtrl = TextEditingController();
+  final dateCtrl = TextEditingController();
+  bool isLoading = false;
   final picker = ImagePicker();
 
   VideoPlayerController _videoPlayerController;
@@ -52,9 +50,7 @@ class _TalentShowPersonState extends State<TalentShowPerson> {
 
     _videoPlayerController = VideoPlayerController.file(file)
       ..initialize().then((_) {
-      setState(() {
-
-      });
+        setState(() {});
         _videoPlayerController.play();
       });
   }
@@ -66,296 +62,341 @@ class _TalentShowPersonState extends State<TalentShowPerson> {
 
     _videoPlayerController = VideoPlayerController.file(file)
       ..initialize().then((_) {
-      setState(() {
-
-      });
+        setState(() {});
         _videoPlayerController.play();
-
-       });
+      });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-      return Directionality(textDirection: TextDirection.rtl,
-        child: Scaffold(
-          body: Container(
-            height:size.height,
-            width: size.width,
-            child: Form(
-              key: _key,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: ListView(
-                  children: [
-                    SizedBox(
-                      height: 20,
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        body: Container(
+          height: size.height,
+          width: size.width,
+          child: Form(
+            key: _key,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: ListView(
+                children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'تقديم طلب فردي',
+                      style: TextStyle(
+                          fontFamily: 'Cairo',
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black54),
                     ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'تقديم طلب فردي',
-                        style: TextStyle(fontFamily: 'Cairo', fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black54),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-
-                    TextFormField(
-                      controller: name,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'الاسم لا يمكن ان يكون فارغ';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _name = value;
-                      },
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'الاسم'),
-                      style: styleField,
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      controller: position,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'مركز اللعب لا يمكن ان يكون فارغ';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _position = value;
-                      },
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'مركز اللعب'),
-                      style: styleField,
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      controller: country,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'البلد لا يمكن ان يكون فارغ';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _country = value;
-                      },
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'البلد'),
-                      style: styleField,
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      controller: location,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'العنوان لا يمكن ان يكون فارغ';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _location = value;
-                      },
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'العنوان'),
-                      style: styleField,
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      controller: numberId,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'الرقم القومي لا يمكن ان يكون فارغ';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _numberId = value;
-                      },
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'الرقم القومي'),
-                      style: styleField,
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      controller: number,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'رقم الهاتف لا يمكن ان يكون فارغ';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _number = value;
-                      },
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'رقم الهاتف'),
-                      style: styleField,
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      controller: email,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'البريد الالكتروتي لا يمكن ان يكون فارغ';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _email = value;
-                      },
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'البريد الالكتروني'),
-                      style: styleField,
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      controller: date,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'التاريخ لا يمكن ان يكون فارغ';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _date = value;
-                      },
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          labelText: 'التاريخ'),
-                      style: styleField,
-                    ),
-                    SizedBox(height: 10),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        '${file==null?"":file.toString()}',
-                        style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text('ارسال فيديو من ',style: TextStyle(fontFamily: 'Cairo',fontSize: 16,fontWeight: FontWeight.bold,color: Colors.black),),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        MaterialButton(
-                          color: Colors.green[800],
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15)
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    autofocus: false,
+                    controller: nameCtrl,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'الاسم لا يمكن ان يكون فارغ';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _name = value;
+                    },
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        labelText: 'الاسم'),
+                    style: styleField,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    controller: positionCtrl,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'مركز اللعب لا يمكن ان يكون فارغ';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _position = value;
+                    },
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        labelText: 'مركز اللعب'),
+                    style: styleField,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    controller: countryCtrl,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'البلد لا يمكن ان يكون فارغ';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _country = value;
+                    },
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        labelText: 'البلد'),
+                    style: styleField,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    controller: locationCtrl,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'العنوان لا يمكن ان يكون فارغ';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _location = value;
+                    },
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        labelText: 'العنوان'),
+                    style: styleField,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    controller: numberIdCtrl,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'الرقم القومي لا يمكن ان يكون فارغ';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _numberId = value;
+                    },
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        labelText: 'الرقم القومي'),
+                    style: styleField,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    controller: numberCtrl,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'رقم الهاتف لا يمكن ان يكون فارغ';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _number = value;
+                    },
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        labelText: 'رقم الهاتف'),
+                    style: styleField,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    controller: emailCtrl,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'البريد الالكتروتي لا يمكن ان يكون فارغ';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _email = value;
+                    },
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        labelText: 'البريد الالكتروني'),
+                    style: styleField,
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    autofocus: false,
+                    controller: dateCtrl,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'التاريخ لا يمكن ان يكون فارغ';
+                      }
+                      return null;
+                    },
+                    onSaved: (value) {
+                      _date = value;
+                    },
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        labelText: 'التاريخ'),
+                    style: styleField,
+                  ),
+                  SizedBox(height: 10),
+                  isLoading
+                      ? Container(
+                          width: size.width * 0.2,
+                          height: size.width * 0.2,
+                          child: Center(child: CircularProgressIndicator()),
+                        )
+                      : Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            '${file == null ? "" : file.toString()}',
+                            style: TextStyle(
+                                fontSize: 10, fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
                           ),
-                          child: Text('معرض',style: TextStyle(fontFamily: 'Cairo',fontSize: 14,fontWeight: FontWeight.bold,color: Colors.white),),
-                          onPressed: _pickVideo,
                         ),
-                        /// Material button is same as Raised button
-                        MaterialButton(
-                          color: Colors.green[800],
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15)
-                          ),
-                          child: Text('كاميرا',style: TextStyle(fontFamily: 'Cairo',fontSize: 14,fontWeight: FontWeight.bold,color: Colors.white),),
-                          onPressed: _pickVideoCamera,
-                        ),
-                      ],
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'ارسال فيديو من ',
+                      style: TextStyle(
+                          fontFamily: 'Cairo',
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
                     ),
-                    SizedBox(height: 10,),
-                    MaterialButton(
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      MaterialButton(
                         color: Colors.green[800],
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Text(
+                          'معرض',
+                          style: TextStyle(
+                              fontFamily: 'Cairo',
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
                         ),
-                        child: Text('ارسال الطلب',style: TextStyle(fontFamily: 'Cairo',fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),),
-                        onPressed: (){
-                          if (!_key.currentState.validate()) {
-                            return;
-                          }
-                          _key.currentState.save();
+                        onPressed: _pickVideo,
+                      ),
 
-                          task();
-                          print(task());
-                        }),
-                    SizedBox(height: 20,)
-                  ],
-                ),
+                      /// Material button is same as Raised button
+                      MaterialButton(
+                        color: Colors.green[800],
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Text(
+                          'كاميرا',
+                          style: TextStyle(
+                              fontFamily: 'Cairo',
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        onPressed: _pickVideoCamera,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  MaterialButton(
+                      color: Colors.green[800],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Text(
+                        'ارسال الطلب',
+                        style: TextStyle(
+                            fontFamily: 'Cairo',
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      onPressed: () {
+                        if (!_key.currentState.validate()) {
+                          return;
+                        }
+                        _key.currentState.save();
+                        task();
+                      }),
+                  SizedBox(
+                    height: 20,
+                  )
+                ],
               ),
             ),
           ),
-        ),);
+        ),
+      ),
+    );
   }
-  Future task()async{
 
-
-
+  Future task() async {
     /// always use camel case in dart for variable
-    final Name=name.text;
-    final Date = date.text;
-    final Numper=number.text;
-    final Email=email.text;
-    final Numberid=numberId.text;
-    final Country = country.text;
-    final Posation = position.text;
-    final Loaction = location.text;
-
-         return  await FirebaseStorage.instance
+    final name = nameCtrl.text;
+    final date = dateCtrl.text;
+    final number = numberCtrl.text;
+    final email = emailCtrl.text;
+    final numberId = numberIdCtrl.text;
+    final country = countryCtrl.text;
+    final position = positionCtrl.text;
+    final location = locationCtrl.text;
+    setState(() {
+      isLoading = true;
+    });
+    return await FirebaseStorage.instance
         .ref()
-        .child('videos/${Uri.file(  file.path).pathSegments.last}')
-        .putFile(file).then((value) {
-         value.ref.getDownloadURL().then((value) async{
-         final videoLink = '$value';
-         return await FirebaseFirestore.instance.collection('professional').add({
-              'video' : videoLink,
-              'name' : Name,
-              'date' : Date,
-              'number' : Numper,
-              'number id' : Numberid,
-              'Email' : Email,
-              'country' : Country,
-              'position' : Posation,
-              'loaction' : Loaction,
-           }).whenComplete((){
-           name.clear();
-           date.clear();
-           number.clear();
-           email.clear();
-           numberId.clear();
-           country.clear();
-           location.clear();
-             position.clear();
-           setState(() {
+        .child('videos/${Uri.file(file.path).pathSegments.last}')
+        .putFile(file)
+        .then((value) {
+      value.ref.getDownloadURL().then((value) async {
+        final videoLink = '$value';
+        print("Video link => $value");
+        return await FirebaseFirestore.instance.collection('professional').add({
+          'video': videoLink,
+          'name': name,
+          'date': date,
+          'number': number,
+          'numberId': numberId,
+          'email': email,
+          'country': country,
+          'position': position,
+          'location': location,
+        }).whenComplete(() {
+          nameCtrl.clear();
+          dateCtrl.clear();
+          numberCtrl.clear();
+          emailCtrl.clear();
+          numberIdCtrl.clear();
+          countryCtrl.clear();
+          locationCtrl.clear();
+          positionCtrl.clear();
+          setState(() {
             file = null;
-           });
-
-         }).catchError((e){
-           print( "error => "+e.toString());
-         });
+            isLoading = false;
           });
+        }).catchError((e) {
+          print("error => " + e.toString());
+        });
+      });
     });
   }
 }
