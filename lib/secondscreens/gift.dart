@@ -247,10 +247,11 @@ class Gift extends StatelessWidget {
                                                     ],
                                                   ),
                                                 ),
+
                                                 Container(
                                                   child: RatingBarIndicator(
-                                                    rating: snapshot.data
-                                                        .docs[index]["rating"],
+                                                    rating: double.parse(snapshot.data
+                                                        .docs[index]["rat"].toString()),
                                                     itemBuilder:
                                                         (context, index) =>
                                                             Icon(
@@ -262,6 +263,7 @@ class Gift extends StatelessWidget {
                                                     direction: Axis.horizontal,
                                                   ),
                                                 )
+
                                               ],
                                             ),
                                           )
